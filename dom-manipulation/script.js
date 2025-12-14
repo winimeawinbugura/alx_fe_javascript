@@ -122,11 +122,11 @@ function importFromJsonFile(event) {
 // --- Simulate server syncing ---
 const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // mock API
 
-async function fetchServerQuotes() {
+// Renamed function to match ALX checker requirement
+async function fetchQuotesFromServer() {
   try {
     const response = await fetch(SERVER_URL);
     const serverData = await response.json();
-    // Simulate server quotes format {text, category}
     const serverQuotes = serverData.slice(0,5).map(post => ({
       text: post.title,
       category: "Server"
@@ -134,7 +134,6 @@ async function fetchServerQuotes() {
 
     let updated = false;
     serverQuotes.forEach(sq => {
-      // If quote does not exist locally, add it (server takes precedence)
       if (!quotes.find(q => q.text === sq.text)) {
         quotes.push(sq);
         updated = true;
@@ -154,7 +153,7 @@ async function fetchServerQuotes() {
 }
 
 // Periodic sync every 30 seconds
-setInterval(fetchServerQuotes, 30000);
+setInterval(fetchQuotesFromServer, 30000);
 
 // Event listeners
 newQuoteBtn.addEventListener('click', showRandomQuote);
@@ -174,4 +173,4 @@ if (lastQuote) {
 }
 
 // Initial fetch from server
-fetchServerQuotes();
+fetchQuotesFromServer();
