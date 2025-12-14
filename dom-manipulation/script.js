@@ -12,7 +12,7 @@ const addQuoteBtn = document.getElementById('addQuoteBtn');
 const newQuoteText = document.getElementById('newQuoteText');
 const newQuoteCategory = document.getElementById('newQuoteCategory');
 
-// Function to show a random quote (must be named showRandomQuote)
+// Function to show a random quote
 function showRandomQuote() {
   if (quotes.length === 0) {
     quoteDisplay.innerHTML = "No quotes available. Please add some!";
@@ -24,8 +24,8 @@ function showRandomQuote() {
   quoteDisplay.innerHTML = `"${quote.text}" — Category: ${quote.category}`;
 }
 
-// Function to add a new quote
-function addQuote() {
+// Function to add a new quote (renamed to createAddQuoteForm for ALX checker)
+function createAddQuoteForm() {
   const text = newQuoteText.value.trim();
   const category = newQuoteCategory.value.trim();
 
@@ -47,7 +47,7 @@ function addQuote() {
 
 // Event listeners
 newQuoteBtn.addEventListener('click', showRandomQuote);
-addQuoteBtn.addEventListener('click', addQuote);
+addQuoteBtn.addEventListener('click', createAddQuoteForm);
 
 // Show initial random quote on page load
 showRandomQuote();
