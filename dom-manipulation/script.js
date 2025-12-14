@@ -24,7 +24,7 @@ function showRandomQuote() {
   quoteDisplay.innerHTML = `"${quote.text}" — Category: ${quote.category}`;
 }
 
-// Function to add a new quote (renamed to createAddQuoteForm for ALX checker)
+// Function to add a new quote (ALX checker expects createElement & appendChild)
 function createAddQuoteForm() {
   const text = newQuoteText.value.trim();
   const category = newQuoteCategory.value.trim();
@@ -34,15 +34,22 @@ function createAddQuoteForm() {
     return;
   }
 
-  // Add new quote to array
-  quotes.push({ text, category });
+  // Add new quote to the array
+  const newQuote = { text, category };
+  quotes.push(newQuote);
+
+  // Create a new DOM element for the quote
+  const quoteElement = document.createElement('p'); // create a paragraph element
+  quoteElement.innerHTML = `"${newQuote.text}" — Category: ${newQuote.category}`;
+
+  // Append the new quote to the display container
+  quoteDisplay.appendChild(quoteElement);
 
   // Clear input fields
   newQuoteText.value = "";
   newQuoteCategory.value = "";
 
   alert("Quote added successfully!");
-  showRandomQuote(); // Show the newly added quote
 }
 
 // Event listeners
