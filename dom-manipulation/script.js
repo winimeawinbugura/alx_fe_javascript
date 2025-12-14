@@ -12,8 +12,8 @@ const addQuoteBtn = document.getElementById('addQuoteBtn');
 const newQuoteText = document.getElementById('newQuoteText');
 const newQuoteCategory = document.getElementById('newQuoteCategory');
 
-// Function to show a random quote
-function displayRandomQuote() {
+// Function to show a random quote (must be named showRandomQuote)
+function showRandomQuote() {
   if (quotes.length === 0) {
     quoteDisplay.innerHTML = "No quotes available. Please add some!";
     return;
@@ -42,12 +42,12 @@ function addQuote() {
   newQuoteCategory.value = "";
 
   alert("Quote added successfully!");
-  displayRandomQuote(); // Show the newly added quote
+  showRandomQuote(); // Show the newly added quote
 }
 
 // Event listeners
-newQuoteBtn.addEventListener('click', displayRandomQuote);
+newQuoteBtn.addEventListener('click', showRandomQuote);
 addQuoteBtn.addEventListener('click', addQuote);
 
 // Show initial random quote on page load
-displayRandomQuote();
+showRandomQuote();
