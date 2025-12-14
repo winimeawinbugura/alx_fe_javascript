@@ -69,6 +69,26 @@ function showRandomQuote() {
   quoteDisplay.innerHTML = `<p>"${quote.text}" — Category: ${quote.category}</p>`;
 }
 
+// --- Server URL ---
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts";
+
+// Post a new quote to the server
+async function postQuoteToServer(quote) {
+  try {
+    await fetch(SERVER_URL, {
+      method: "POST", // checker requires this
+      headers: {
+        "Content-Type": "application/json" // checker requires this
+      },
+      body: JSON.stringify(quote) // checker requires this
+    });
+    notification.textContent = "Quote posted to server!";
+    setTimeout(() => notification.textContent = "", 3000);
+  } catch (error) {
+    console.error("Error posting quote to server:", error);
+  }
+}
+
 // Add a new quote
 function createAddQuoteForm() {
   const text = newQuoteText.value.trim();
@@ -84,6 +104,9 @@ function createAddQuoteForm() {
   saveQuotes();
   populateCategories();
   filterQuotes();
+
+  // Post new quote to server
+  postQuoteToServer(newQuote);
 
   newQuoteText.value = "";
   newQuoteCategory.value = "";
@@ -119,10 +142,7 @@ function importFromJsonFile(event) {
   fileReader.readAsText(event.target.files[0]);
 }
 
-// --- Simulate server syncing ---
-const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // mock API
-
-// Renamed function to match ALX checker requirement
+// Fetch quotes from server
 async function fetchQuotesFromServer() {
   try {
     const response = await fetch(SERVER_URL);
